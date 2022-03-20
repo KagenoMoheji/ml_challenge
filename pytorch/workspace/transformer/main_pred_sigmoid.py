@@ -43,7 +43,7 @@ def main(dir_models, model_name, is_pred):
                 "n_encoder_layers": 3,
                 "n_decoder_layers": 3,
                 "dropout_enc": 0.5,
-                "dropout_dec": None,
+                "dropout_dec": 0.2,
                 "dropout_pe": None
             },
             "lr": 0.002,
