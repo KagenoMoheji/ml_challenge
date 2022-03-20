@@ -1,0 +1,20 @@
+{
+    "pytorch_device": "cpu",
+    "enc_seq_len": 6,
+    "model_clsargs": {
+        "dec_seq_len": 2,
+        "input_size": 1,
+        "out_seq_len": 1,
+        "dim_val": 10,
+        "dim_attn": 5,
+        "n_heads": 3,
+        "n_encoder_layers": 3,
+        "n_decoder_layers": 3,
+        "dropout_enc": 0.5,
+        "dropout_dec": null,
+        "dropout_pe": null
+    },
+    "lr": 0.002,
+    "epochs": 10,
+    "batch_size": 15
+}
