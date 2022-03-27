@@ -8,7 +8,7 @@ import inspect
 import os
 import sys
 PYPATH = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/"
-sys.path.append(PYPATH + ".")
+sys.path.append(PYPATH + "./../..") # `workspace/transformer`をrootにする
 
 from argparse import ArgumentParser
 import pandas as pd
