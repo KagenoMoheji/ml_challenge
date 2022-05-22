@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: ./docker/dev/Dockerfile
+      args:
+        USER_HOST: ${USER_HOST}
+        UID_HOST: ${UID_HOST}
+        GID_HOST: ${GID_HOST}
+        APPNAME: ${APPNAME}
+        SHARED_WORKSPACE_HOST: ${SHARED_WORKSPACE_HOST}
+        SHARED_WORKSPACE_CONTAINER: ${SHARED_WORKSPACE_CONTAINER}
+        PYTHON_VERSION_HOST: ${PYTHON_VERSION_HOST}
+        DOCKER_TOOLS_PYTHON_HOST: ./${DOCKER_TOOLS_PYTHON_HOST}
+        PORT_OF_WEB_PLOTS: ${PORT_OF_WEB_PLOTS}
+    image: ${APPNAME}
+    container_name: ${APPNAME}
+    ports:
+      - ${PORT_OF_WEB_PLOTS}:${PORT_OF_WEB_PLOTS}
+    volumes:
+      - ./${SHARED_WORKSPACE_HOST}:${SHARED_WORKSPACE_CONTAINER}
+      - ./${DOCKER_TOOLS_PYTHON_HOST}:/opt/docker_tools/python
+    tty: true
+
+
+
