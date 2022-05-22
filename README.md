@@ -36,6 +36,11 @@
                         ├ main_{詳細の手法・アプローチ名}.py
                         ├ proc_{工程名}/ [prc=process,procedure]
                             ├ main_{詳細の手法・アプローチ名}.py
+                        ├ proc_create_model/
+                        ├ proc_pred_weather/
+                        ├ proc_download_data/
+                            ├ main_download_weather.py
+                        ├ (proc_data_process/) [本来なら`modules_ml/features_process`に関数化すべき]
                         ├ modules_common/ [機械学習関連以外の共通処理]
                         ├ modules_ml/ [機械学習関連の共通処理]
                             ├ models/ [モデル定義]
