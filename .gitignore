@@ -1,6 +1,15 @@
 .history/
 .vscode/
 .DS_Store
+*.gz
+*.tar
+*.zip
+*.csv
 
 .venv/
 __pycache__/
+**/outputs/**/*.pth
+**/outputs/**/*.model
+**/outputs/**/*.onnx
+**/outputs/**/*.bin
+**/outputs/**/model*.json
