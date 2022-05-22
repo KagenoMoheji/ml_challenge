@@ -1,0 +1,3 @@
+'''
+Stock TechnicalAnalytics by Others.
+'''

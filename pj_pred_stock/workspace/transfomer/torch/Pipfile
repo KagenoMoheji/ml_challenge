@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+torch = {file = "https://download.pytorch.org/whl/cpu/torch-1.11.0%2Bcpu-cp39-cp39-linux_x86_64.whl"}
+matplotlib = "*"
+numpy = "*"
+pandas = "*"
+japanize-matplotlib = "*"
+investpy = "*"
+pyti = "*"
+ta = "*"
+pipdeptree = "*"
+ta-lib = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
