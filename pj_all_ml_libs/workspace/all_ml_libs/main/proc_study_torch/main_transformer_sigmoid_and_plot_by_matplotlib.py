@@ -98,7 +98,7 @@ def main(dir_models, model_name, is_pred):
 
         dir_output_model = "{0}/{1}".format(dir_models, model_name)
         os.makedirs(dir_output_model, exist_ok = True)
-        torch.save(transformer.state_dict(), "{}model.pth".format(dir_output_model))
+        torch.save(transformer.state_dict(), "{}/model.pth".format(dir_output_model))
         with open("{0}/model_params.json".format(dir_output_model), mode = "w", encoding = "utf8") as f:
             f.write(
                 json.dumps(
@@ -113,7 +113,7 @@ def main(dir_models, model_name, is_pred):
         with open("{}/model_params.json".format(dir_load_model), mode = "r", encoding = "utf8") as f:
             transformer_params = json.loads(f.read())
         transformer = TransformerModel(**transformer_params["model_clsargs"]).to(transformer_params["pytorch_device"])
-        transformer.load_state_dict(torch.load("{}model.pth".format(dir_load_model)))
+        transformer.load_state_dict(torch.load("{}/model.pth".format(dir_load_model)))
 
         fig = plt.figure()
         ax = fig.add_subplot(111)
