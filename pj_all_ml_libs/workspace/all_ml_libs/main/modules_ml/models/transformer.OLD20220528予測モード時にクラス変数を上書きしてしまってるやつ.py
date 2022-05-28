@@ -75,13 +75,12 @@ class PositionalEncoding(nn.Module):
             self.dropout = nn.Dropout(dropout)
     
     def forward(self, x, training = True):
-        dropout = self.dropout
         if not training:
             # Dropoutは基本的に予測時で使わない
-            dropout = None # dropout = nn.Dropout(0.0)
+            self.dropout = None # self.dropout = nn.Dropout(0.0)
         x = x + self.pe[:x.size(1), :].squeeze(1)
-        if dropout is not None:
-            x = dropout(x)
+        if self.dropout is not None:
+            x = self.dropout(x)
         return x
 
 class AttentionBlock(nn.Module):
@@ -99,17 +98,16 @@ class AttentionBlock(nn.Module):
             self.dropout = nn.Dropout(dropout)
     
     def forward(self, x, kv = None, training = True):
-        dropout = self.dropout
         if not training:
             # Dropoutは基本的に予測時で使わない
-            dropout = None # dropout = nn.Dropout(0.0)
+            self.dropout = None # self.dropout = nn.Dropout(0.0)
         if kv is None:
             x = attention(self.query(x), self.key(x), self.value(x))
         else:
             x = attention(self.query(x), self.key(kv), self.value(kv))
-        if dropout is not None:
+        if self.dropout is not None:
             ## https://github.com/pytorch/pytorch/blob/7c2103ad5ffdc1ef91231c966988f7f2a61b4166/torch/nn/functional.py#L5003
-            x = dropout(x)
+            x = self.dropout(x)
         return x
 
 class MultiHeadAttentionBlock(nn.Module):
@@ -157,27 +155,23 @@ class EncoderLayer(nn.Module):
             self.dropout2 = nn.Dropout(dropout)
     
     def forward(self, x, training = True):
-        dropout = self.dropout
-        dropout1 = self.dropout1
-        dropout2 = self.dropout2
         if not training:
             # Dropoutは基本的に予測時で使わない
-            dropout = None # dropout = nn.Dropout(0.0)
-            dropout1 = None # dropout1 = nn.Dropout(0.0)
-            dropout2 = None # dropout2 = nn.Dropout(0.0)
+            self.dropout1 = None # self.dropout1 = nn.Dropout(0.0)
+            self.dropout2 = None # self.dropout2 = nn.Dropout(0.0)
         a = self.attn(x)
-        if dropout1 is not None:
+        if self.dropout1 is not None:
             # https://github.com/pytorch/pytorch/blob/7c2103ad5ffdc1ef91231c966988f7f2a61b4166/torch/nn/modules/transformer.py#L356
-            a = dropout1(a)
+            a = self.dropout1(a)
         x = self.norm1(x + a)
         a = torchF.elu(self.fc1(x))
-        if dropout is not None:
+        if self.dropout is not None:
             # https://github.com/pytorch/pytorch/blob/7c2103ad5ffdc1ef91231c966988f7f2a61b4166/torch/nn/modules/transformer.py#L360
-            a = dropout(a)
+            a = self.dropout(a)
         a = self.fc2(a)
-        if dropout2 is not None:
+        if self.dropout2 is not None:
             # https://github.com/pytorch/pytorch/blob/7c2103ad5ffdc1ef91231c966988f7f2a61b4166/torch/nn/modules/transformer.py#L361
-            a = dropout2(a)
+            a = self.dropout2(a)
         x = self.norm2(x + a)
         return x
 
@@ -207,34 +201,27 @@ class DecoderLayer(nn.Module):
             self.dropout3 = nn.Dropout(dropout)
     
     def forward(self, x, enc, training = True):
-        dropout = self.dropout
-        dropout1 = self.dropout1
-        dropout2 = self.dropout2
-        dropout3 = self.dropout3
         if not training:
             # Dropoutは基本的に予測時で使わない
-            dropout = None # dropout = nn.Dropout(0.0)
-            dropout1 = None # dropout1 = nn.Dropout(0.0)
-            dropout2 = None # dropout2 = nn.Dropout(0.0)
-            dropout3 = None # dropout3 = nn.Dropout(0.0)
+            self.dropout = None # self.dropout = nn.Dropout(0.0)
         a = self.attn1(x)
-        if dropout1 is not None:
+        if self.dropout1 is not None:
             # https://github.com/pytorch/pytorch/blob/7c2103ad5ffdc1ef91231c966988f7f2a61b4166/torch/nn/modules/transformer.py#L470
-            a = dropout1(a)
+            a = self.dropout1(a)
         x = self.norm1(a + x)
         a = self.attn2(x, kv = enc)
-        if dropout2 is not None:
+        if self.dropout2 is not None:
             # https://github.com/pytorch/pytorch/blob/7c2103ad5ffdc1ef91231c966988f7f2a61b4166/torch/nn/modules/transformer.py#L479
-            a = dropout2(a)
+            a = self.dropout2(a)
         x = self.norm2(a + x)
         a = torchF.elu(self.fc1(x))
-        if dropout is not None:
+        if self.dropout is not None:
             # https://github.com/pytorch/pytorch/blob/7c2103ad5ffdc1ef91231c966988f7f2a61b4166/torch/nn/modules/transformer.py#L483
-            a = dropout(a)
+            a = self.dropout(a)
         a = self.fc2(a)
-        if dropout3 is not None:
+        if self.dropout3 is not None:
             # https://github.com/pytorch/pytorch/blob/7c2103ad5ffdc1ef91231c966988f7f2a61b4166/torch/nn/modules/transformer.py#L484
-            a = dropout3(a)
+            a = self.dropout3(a)
         x = self.norm3(a + x)
         return x
 
