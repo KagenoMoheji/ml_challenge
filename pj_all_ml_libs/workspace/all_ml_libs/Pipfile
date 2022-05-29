@@ -308,5 +308,5 @@ python_version = "3.9"
 
 [scripts]
 freeze = "pip freeze"
-streamlit = "streamlit run --server.port 8100"
+streamlit = "streamlit run --server.port 8100 --runner.magicEnabled false"
 pipdeptree = "pipdeptree"
