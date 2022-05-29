@@ -65,13 +65,18 @@ class FigObserver:
         '''
         self._figが保持しているサブプロットの一覧表示。
         '''
-        output = pd.DataFrame(
-            {
-                "ax_name": self._dict_ax.keys(),
-                "subplot_params": [self._dict_ax[ax_name]["subplot_params"] for ax_name in self._dict_ax]
-            }
+        output = pd.DataFrame([{
+                "ax_name": ax_name,
+                "subplot_params": self._dict_ax[ax_name]["subplot_params"]
+            } for ax_name in self._dict_ax]
         )
         print(output)
+
+    def get_ax(self, ax_name):
+        return self._dict_ax[ax_name]["ax"]
+    
+    def get_fig(self):
+        return self._fig
     
     def show(self):
         '''
