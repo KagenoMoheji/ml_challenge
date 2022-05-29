@@ -8,6 +8,7 @@
 
 .venv/
 __pycache__/
+**/*-ubyte
 **/outputs/**/*.pth
 **/outputs/**/*.model
 **/outputs/**/*.onnx
