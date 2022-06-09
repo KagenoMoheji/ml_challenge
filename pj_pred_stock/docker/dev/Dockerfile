@@ -1,6 +1,6 @@
-ARG PYTHON_VERSION_HOST
+ARG PYTHON_VERSION_CONTAINER
 
-FROM python:${PYTHON_VERSION_HOST}
+FROM python:${PYTHON_VERSION_CONTAINER}
 
 # 他のARGはFROMより後でないと受け取ってくれないらしい
 ARG USER_HOST
@@ -11,7 +11,7 @@ ARG SHARED_WORKSPACE_HOST
 ARG SHARED_WORKSPACE_CONTAINER
 ARG DOCKER_TOOLS_PYTHON_HOST
 ARG DOCKER_TOOLS_ROOT="/opt/docker_tools"
-ARG PYTHON_VERSION_HOST
+ARG PYTHON_VERSION_CONTAINER
 
 ## ${PYTHON_ROOT}にinstall_requirements.bash(とuser_requirements.txt)をコピー
 COPY ./${DOCKER_TOOLS_PYTHON_HOST} ${DOCKER_TOOLS_ROOT}/python
@@ -32,10 +32,10 @@ RUN apt-get update \
         wget \
         curl \
         git \
-    && python${PYTHON_VERSION_HOST} -V \
-    && bash ${DOCKER_TOOLS_ROOT}/python/install_requirements.bash -v ${PYTHON_VERSION_HOST} -r ${DOCKER_TOOLS_ROOT}/python/user_requirements.txt \
+    && python${PYTHON_VERSION_CONTAINER} -V \
+    && bash ${DOCKER_TOOLS_ROOT}/python/install_requirements.bash -v ${PYTHON_VERSION_CONTAINER} -r ${DOCKER_TOOLS_ROOT}/python/user_requirements.txt \
     # 以下，デフォルトで入っているべきライブラリをインストール
-    && python${PYTHON_VERSION_HOST} -m pip install \
+    && python${PYTHON_VERSION_CONTAINER} -m pip install \
         pipdeptree \
         pipenv \
     # 以下，Pythonライブラリに必要なDebian系パッケージをインストール
