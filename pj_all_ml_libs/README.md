@@ -67,10 +67,6 @@ pipenv install \
     - https://scipy.org/install/
 - ~~theano~~
     - 開発中止
-- jax
-    - https://github.com/google/jax#installation
-- jaxlib
-    - https://jax.readthedocs.io/en/latest/developer.html#building-or-installing-jaxlib
 
 ##### データフレーム・表計算
 - pandas
@@ -105,6 +101,10 @@ pipenv install \
 - dask
     - 配列・数値計算とデータフレーム・表計算の両方対応
     - https://docs.dask.org/en/latest/install.html
+- ~~ray~~
+    - Windows向けに，WSLでもインストールしづらいっぽい？一旦インストールしない
+- ~~joblib~~
+    - インストール成功か微妙．一旦インストールしない
 
 ##### DB接続
 - pymssql
@@ -149,6 +149,10 @@ pipenv install \
 - ~~stellargraph~~
     - https://stellargraph.readthedocs.io/en/stable/README.html#installation
     - Python3.6までっぽく，それ以降ではインストールできそうにない
+- jax
+    - https://github.com/google/jax#installation
+- jaxlib
+    - https://jax.readthedocs.io/en/latest/developer.html#building-or-installing-jaxlib
 
 ### 機械学習関連の便利・ラッパー系
 - scikit-learn
