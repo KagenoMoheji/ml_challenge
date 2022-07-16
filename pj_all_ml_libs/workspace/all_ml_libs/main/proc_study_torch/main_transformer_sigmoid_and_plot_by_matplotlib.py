@@ -8,6 +8,7 @@ import os
 import sys
 PYPATH = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 ROOTPATH = PYPATH + "/./.." # `main`をrootにする
+MODNAME = inspect.getfile(inspect.currentframe()).split("/")[-1]
 sys.path.append(ROOTPATH)
 
 import json
