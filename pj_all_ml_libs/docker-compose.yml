@@ -13,7 +13,7 @@ services:
         SHARED_WORKSPACE_HOST: ${SHARED_WORKSPACE_HOST}
         SHARED_WORKSPACE_CONTAINER: ${SHARED_WORKSPACE_CONTAINER}
         PYTHON_VERSION_CONTAINER: ${PYTHON_VERSION_CONTAINER}
-        DOCKER_TOOLS_PYTHON_HOST: ./${DOCKER_TOOLS_PYTHON_HOST}
+        DOCKER_TOOLS_HOST: ./${DOCKER_TOOLS_HOST}
         PORT_OF_WEB_PLOTS: ${PORT_OF_WEB_PLOTS}
     image: ${APPNAME}
     container_name: ${APPNAME}
@@ -21,7 +21,7 @@ services:
       - ${PORT_OF_WEB_PLOTS}:${PORT_OF_WEB_PLOTS}
     volumes:
       - ./${SHARED_WORKSPACE_HOST}:${SHARED_WORKSPACE_CONTAINER}
-      - ./${DOCKER_TOOLS_PYTHON_HOST}:/opt/docker_tools/python
+      - ./${DOCKER_TOOLS_HOST}:/opt/docker_tools
     tty: true
 
 
