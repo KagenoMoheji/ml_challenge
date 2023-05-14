@@ -1,14 +1,21 @@
 .history/
 .vscode/
 .DS_Store
+*.whl
+*.tar.gz
 *.gz
 *.tar
 *.zip
 *.csv
+*.jpeg
+*.jpg
+*.jfif
+*.png
 
 .venv/
 __pycache__/
 **/*-ubyte
+**/inputs/
 **/outputs/**/*.pth
 **/outputs/**/*.model
 **/outputs/**/*.onnx
