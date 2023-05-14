@@ -27,10 +27,11 @@ services:
       # ここでGPUの指定
       resources:
         reservations:
+          # https://docs.docker.jp/compose/gpu-support.html
           devices:
             - driver: nvidia
-            - count: 1
-            - capabilities: [gpu] # [utility, compute, video]
+              # count: 1
+              capabilities: [gpu]
 
 
 

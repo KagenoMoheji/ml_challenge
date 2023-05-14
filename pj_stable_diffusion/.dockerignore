@@ -1,3 +1,6 @@
 # Python関連
 .venv/
 __pycache__/
+libs/
+inputs/
+outputs/
