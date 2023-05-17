@@ -30,8 +30,8 @@ services:
           # https://docs.docker.jp/compose/gpu-support.html
           devices:
             - driver: nvidia
-              # count: 1
-              capabilities: [gpu]
+              count: 1 # WARNING: これ設定しないとGPU検知してくれない
+              capabilities: [gpu] # [compute, utility, video]
 
 
 
