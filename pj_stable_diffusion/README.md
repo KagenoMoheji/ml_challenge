@@ -1,5 +1,4 @@
 docker-compose on WSL2 with GPU使ってStableDiffusionを遊びたい．
-TODO: GPU使うあたり分からん
 
 ### 手順メモ20230508
 1. GPU実行環境構築
@@ -82,7 +81,7 @@ TODO: GPU使うあたり分からん
             reservations:
               devices:
                 - driver: nvidia
-                  # count: 1
+                  count: 1 # WARNING: これ設定しないとGPU検知してくれない
                   capabilities: [gpu]
     ```
     - `docker-compose.yml`の上記の項目`resources`でGPUをdockerが検知できるように設定する
