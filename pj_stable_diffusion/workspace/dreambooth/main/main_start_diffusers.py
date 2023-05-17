@@ -24,10 +24,18 @@ DEVICE = "cuda"
 DIR_INPUT_MODELS = PYPATH + "/inputs/models"
 CNT_GEN = 5
 
+# ベースモデルの選択
+## Huggingfaceのモデルをダウンロードしてパイプラインにする
+# model_id = "stabilityai/stable-diffusion-2-1"
+## Civitaiのsafetensors形式のモデルを読み込んでパイプラインにする
+fname_model = "majicmixRealistic_v4.safetensors"
+# プロンプト
+prompt = "<ポジティブプロンプト>"
+prompt_neg = "<ネガティブプロンプト>"
+
 # パイプラインの準備
 '''
 ## Huggingfaceのモデルをダウンロードしてパイプラインにする
-model_id = "stabilityai/stable-diffusion-2-1"
 pipe = StableDiffusionPipeline.from_pretrained(
     model_id, 
     scheduler = EulerDiscreteScheduler.from_pretrained(
@@ -38,7 +46,6 @@ pipe = StableDiffusionPipeline.from_pretrained(
 ).to(DEVICE)
 '''
 ## Civitaiのsafetensors形式のモデルを読み込んでパイプラインにする
-fname_model = "majicmixRealistic_v4.safetensors"
 pipe = StableDiffusionPipeline.from_ckpt(
     "{}/{}".format(DIR_INPUT_MODELS, fname_model),
     torch_dtype = torch.float16,
@@ -61,10 +68,6 @@ pipe = DiffusionPipeline.from_pretrained(
 #     pipe.safety_checker = lambda images, **kwargs: (images, False)
 # 弱いGPUでも処理できるようにする設定を有効化
 pipe.enable_attention_slicing()
-
-# プロンプト
-prompt = "<ポジティブプロンプト>"
-prompt_neg = "<ネガティブプロンプト>"
 
 imgs = pipe(
     prompt,
